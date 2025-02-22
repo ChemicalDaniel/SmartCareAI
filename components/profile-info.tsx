@@ -6,9 +6,10 @@ export function ProfileInfo() {
   const profile = {
     name: "Jane Doe",
     age: 35,
-    height: "5'6\"",
-    weight: "140 lbs",
+    height: 1.6764,
+    weight: 63.5029,
     bloodType: "O+",
+    bmi: 22.6
   }
 
   return (
@@ -38,9 +39,12 @@ export function ProfileInfo() {
             <Label>Blood Type:</Label>
             <span>{profile.bloodType}</span>
           </div>
+           <div className= "flex justify-between">
+            <Label>BMI:</Label>
+            <span>{profile.bmi}</span>
+          </div>
         </div>
       </CardContent>
     </Card>
   )
 }
-
