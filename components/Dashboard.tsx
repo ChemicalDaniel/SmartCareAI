@@ -18,22 +18,20 @@ export default function Dashboard() {
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
         {greeting}, {userName}
       </h1>
+      <div className="mb-8">
+        <UrgentFollowUp />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
         <div className="lg:col-span-2">
           <TrendsSlider />
         </div>
-        <VitalsDisplay />
+        <div className="flex flex-col justify-between h-full">
+          <UploadSummary />
+          <VitalsDisplay />
+        </div>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <div className="lg:col-span-2">
-          <AISummary />
-        </div>
-        <div>
-          <UrgentFollowUp />
-          <div className="mt-8">
-            <UploadSummary />
-          </div>
-        </div>
+      <div className="mb-8">
+        <AISummary />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <RecentVisits />
