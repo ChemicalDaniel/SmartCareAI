@@ -35,7 +35,7 @@ export default function Features() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        The future of healthcare in your hands
+        The future of your healthcare in your hands
       </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
         {features.map((feature, index) => (
@@ -46,7 +46,7 @@ export default function Features() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <feature.icon className="h-12 w-12 text-blue-500 mb-4 mx-auto" />
+            <feature.icon className="h-12 w-12 text-red-500 mb-4 mx-auto" />
             <h3 className="text-2xl font-semibold mb-2">{feature.title}</h3>
             <p className="text-gray-600">{feature.description}</p>
           </motion.div>
