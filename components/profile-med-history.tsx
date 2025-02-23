@@ -1,22 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmergencyContact } from './emergency-contact';
-
-type Patient = {
-  id: string;
-  fname: string;
-  lname: string;
-  age: number;
-  address: string;
-  email: string;
-  phone: string;
-  height: string;
-  weight: string;
-  bloodType: string;
-  BMI: number;
-  history: Record<string, any>;
-  emergencyContact: Record<string, any>;
-};
+import { Patient } from '@/lib/types/patient';
 
 const excludedHistoryKeys = ['_id', 'patient_name', 'date_of_birth', 'gender'];
 
@@ -84,10 +69,10 @@ const getDateRows = (data: any, category: string): { date: string; details: Reac
           .map((rec) => (typeof rec === 'object' ? formatRecordNode(rec, category) : rec))
           .join(" ");
       }
-    } else if (typeof entries === 'object') {
+    } else if (entries && typeof entries === 'object') {
       details = formatRecordNode(entries, category);
     } else {
-      details = entries.toString();
+      details = String(entries);
     }
     return { date: formattedDate, details };
   });
@@ -121,12 +106,6 @@ const ProfileMedHistory: React.FC = () => {
           fname: fname || '',
           lname: lname || '',
           age,
-          address: '', // not provided in API
-          email: '',   // not provided in API
-          phone: '',   // not provided in API
-          height: '',  // can be extracted elsewhere if needed
-          weight: '',
-          bloodType: '',
           BMI: 0,
           history: user, // store entire JSON as history
           emergencyContact: {} // adjust if provided
@@ -136,6 +115,7 @@ const ProfileMedHistory: React.FC = () => {
       } catch (err) {
         setError('Failed to fetch patient data');
       } finally {
+        
         setLoading(false);
       }
     };
@@ -201,5 +181,68 @@ const ProfileMedHistory: React.FC = () => {
     </Card>
   );
 };
+
+// Define a type for the vital signs entries.
+export type VitalSigns = {
+    date: Date; // raw date; you can format it when displaying
+    bodyHeight: number;
+    painSeverity: number;
+    bodyWeight: number;
+    bmi: number;
+    heartRate: number;
+    respiratoryRate: number;
+  };
+  
+  // A helper that extracts a number from a string (ignoring units and tags)
+  const extractNumber = (value: string): number => {
+    // Use parseFloat to extract the first number it finds.
+    return parseFloat(value);
+  };
+  
+  export function extractVitalSigns(vitalSignsData: Record<string, any>): VitalSigns[] {
+    // vitalSignsData is expected to be an object where each key is a date string.
+    const results: VitalSigns[] = Object.entries(vitalSignsData).map(([dateKey, records]) => {
+      let bodyHeight = NaN,
+        painSeverity = NaN,
+        bodyWeight = NaN,
+        bmi = NaN,
+        heartRate = NaN,
+        respiratoryRate = NaN;
+        
+      // records is expected to be an array of objects
+      for (const record of records) {
+        const desc = record.Description.toLowerCase();
+        const val = record.Value;
+        const num = extractNumber(val);
+        if (desc.includes("body height")) {
+          bodyHeight = num;
+        } else if (desc.includes("pain severity")) {
+          painSeverity = num;
+        } else if (desc.includes("body weight")) {
+          bodyWeight = num;
+        } else if (desc.includes("body mass index")) {
+          bmi = num;
+        } else if (desc.includes("heart rate")) {
+          heartRate = num;
+        } else if (desc.includes("respiratory rate")) {
+          respiratoryRate = num;
+        }
+      }
+      return {
+        date: new Date(dateKey),
+        bodyHeight,
+        painSeverity,
+        bodyWeight,
+        bmi,
+        heartRate,
+        respiratoryRate,
+      };
+    });
+  
+    // Sort the array in descending order (most recent date first)
+    results.sort((a, b) => b.date.getTime() - a.date.getTime());
+    return results;
+  }
+  
 
 export default ProfileMedHistory;

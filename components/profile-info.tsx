@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-
-type Patient = {
-  id: string;
-  fname: string;
-  lname: string;
-  age: number;
-  height: string;
-  weight: string;
-  BMI: number;
-  history: Record<string, any>;
-};
+import { Patient } from '@/lib/types/patient';
 
 export function ProfileInfo() {
   const [patient, setPatient] = useState<Patient | null>(null);
