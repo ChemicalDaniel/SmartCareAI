@@ -1,6 +1,6 @@
 export default function AIExplanation() {
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow-md">
       <h1 className="text-3xl font-bold mb-6">Detailed AI Explanation</h1>
       <p className="mb-4">
         The AI analysis is based on various factors including your vital signs, recent health trends, and medical
