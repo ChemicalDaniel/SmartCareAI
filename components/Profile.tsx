@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { ProfileInfo } from "@/components/profile-info"
 import { EmergencyContact } from "@/components/emergency-contact"
 import { Card } from "./ui/card"
+import MedHistory from "../components/profile-med-history"
 
 type CardTransitionProps = {
   children: React.ReactNode
@@ -35,7 +36,13 @@ export default function ProfilePage() {
         <CardTransition delay={0.2}>
           <EmergencyContact />
         </CardTransition>
+        <div className="col-span-2">
+          <CardTransition delay={0.3}>
+            <MedHistory />
+          </CardTransition>
+        </div>
       </div>
+      
     </div>
   )
 }
