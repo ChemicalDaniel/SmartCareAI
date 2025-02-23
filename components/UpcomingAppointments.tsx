@@ -79,25 +79,5 @@ export default function UpcomingAppointments() {
       )}
     </div>
   )
-  // return (
-  //   <div className="bg-white rounded-lg shadow-md overflow-hidden">
-  //     <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4">
-  //       <h2 className="text-xl font-semibold">Upcoming Appointments</h2>
-  //     </div>
-  //     <div className="p-6">
-  //       <ul className="space-y-4">
-  //         {appointments.map((appointment, index) => (
-  //           <li key={index} className="border-b last:border-b-0 pb-2 last:pb-0">
-  //             <p className="font-semibold text-gray-800">
-  //               {appointment.date} at {appointment.time}
-  //             </p>
-  //             <p className="text-sm text-gray-600">{appointment.doctor}</p>
-  //             <p className="text-sm text-gray-500">{appointment.type}</p>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   </div>
-  // )
 }
 

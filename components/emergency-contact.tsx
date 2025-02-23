@@ -29,12 +29,12 @@ export function EmergencyContact() {
                   const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
                       method: 'POST',
                       body: JSON.stringify({
-                          fname: "Jane",
-                          lname: "Doe",
+                          fname: "David",
+                          lname: "Landry",
                           age: 35,
                           address: "123 Main St, Springfield, IL",
                           email: "sample@email.com",
-                          phone: "(555) 555-5555",
+                          phone: "(404) 894-2000",
                           height: "5'6\"",
                           weight: "140 lbs",
                           bloodType: "O+",
@@ -52,7 +52,7 @@ export function EmergencyContact() {
                               'Social History: Non-smoker',
                               'Functional Status: Independent',
                           ],
-                          emergencyContact: ['Name: John Doe', 'Relationship: Spouse', 'Phone: (555) 123-4567'],
+                          emergencyContact: ['Name: David Landry', 'Relationship: Spouse'],
                           userId: 1,
                       }),
                       headers: {

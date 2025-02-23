@@ -41,8 +41,8 @@ export default async function fetchPatientData() {
             fname: fname || '',
             lname: lname || '',
             age,
-            height,
-            weight,
+            height: parseFloat(height) || 0,
+            weight: parseFloat(weight) || 0,
             BMI,
             history: user, // store entire JSON as history
         };

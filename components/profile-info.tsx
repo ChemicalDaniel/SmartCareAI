@@ -53,13 +53,15 @@ export function ProfileInfo() {
             <Label>Age:</Label>
             <span>{patient.age}</span>
           </div>
-          <div className="flex justify-between">
+            <div className="flex justify-between">
             <Label>Height:</Label>
-            <span>{patient.height}</span>
-          </div>
-          <div className="flex justify-between">
+            <span>
+              {`${Math.floor(patient.height / 30.48)}' ${Math.round((patient.height / 2.54) % 12)}"`}
+            </span>
+            </div>
+            <div className="flex justify-between">
             <Label>Weight:</Label>
-            <span>{patient.weight}</span>
+            <span>{Math.round(patient.weight * 2.20462)} lbs</span>
           </div>
           <div className="flex justify-between">
             <Label>BMI:</Label>

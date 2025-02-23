@@ -3,8 +3,8 @@ export type Patient = {
     fname: string;
     lname: string;
     age: number;
-    height: string;
-    weight: string;
+    height: number;
+    weight: number;
     BMI: number;
     history: Record<string, any>;
   };
