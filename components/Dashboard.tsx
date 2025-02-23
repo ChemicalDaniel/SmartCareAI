@@ -9,6 +9,9 @@ import Prescriptions from "./Prescriptions"
 import UpcomingAppointments from "./UpcomingAppointments"
 import UploadSummary from "./UploadSummary"
 import UrgentFollowUp from "./UrgentFollowUp"
+import fetchPatientData from "@/lib/fetchPatientData"
+import { useEffect, useState } from "react"
+import { Patient } from "@/lib/types/patient"
 
 type CardTransitionProps = {
   children: React.ReactNode
@@ -28,19 +31,42 @@ function CardTransition({ children, delay = 0 }: CardTransitionProps) {
 }
 
 export default function Dashboard() {
-  const userName = "Jane" // This could be fetched from a user context or API
+  const [patient, setPatient] = useState<Patient | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const loadPatient = async () => {
+      try {
+        const data = await fetchPatientData()
+        setPatient(data)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    loadPatient()
+  }, [])
+
+  if (isLoading) {
+    return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-12 h-12 border-4 border-blue-200 rounded-full animate-spin border-t-blue-500"/>
+    </div>
+    )
+  }
+
+  const userName = patient?.fname // This could be fetched from a user context or API
   const currentTime = new Date()
   const greeting =
     currentTime.getHours() < 12
-      ? "Good Morning"
+      ? "Good Morning, " + userName
       : currentTime.getHours() < 18
-      ? "Good Afternoon"
-      : "Good Evening"
+      ? "Good Afternoon, " + userName
+      : "Good Evening, " + userName
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">
-        {greeting}, {userName}
+        {greeting}
       </h1>
 
       <div className="mb-8">
