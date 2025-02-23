@@ -16,7 +16,6 @@ SmartCareAI is a modern healthcare management platform that leverages artificial
 - **UI Components**: Radix UI, Tailwind CSS
 - **Database**: MongoDB
 - **AI Integration**: Google Generative AI
-- **Authentication**: (Specify your auth solution)
 - **Charts**: Chart.js, Recharts
 - **Animation**: Framer Motion
 
