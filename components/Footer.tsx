@@ -12,7 +12,7 @@ export default function Footer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <p>&copy; {new Date().getFullYear()} SmartCare.ai Inc. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} NEO Inc. All rights reserved.</p>
           <p className="mt-2">
             <Link href="#" className="hover:text-gray-900">
               Privacy Policy

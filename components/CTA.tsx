@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 export default function CTA() {
   return (
-    <section id="get-the-app" className="py-20 px-6 md:px-10 bg-gray-100">
+    <section id="get-the-app" className="pt-20 px-6 md:px-10 bg-gray-100">
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
           className="text-4xl md:text-5xl font-bold mb-6"

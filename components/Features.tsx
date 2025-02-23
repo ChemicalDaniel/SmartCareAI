@@ -17,7 +17,7 @@ const features = [
   {
     icon: Users,
     title: "Connect with Experts",
-    description: "Consult healthcare professionals securely from anywhere.",
+    description: "Conveniently refer to medical professional from anywhere.",
   },
   {
     icon: Clipboard,
