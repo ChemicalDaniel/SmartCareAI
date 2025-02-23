@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmergencyContact } from './emergency-contact';
 import { Patient } from '@/lib/types/patient';
+import fetchPatientData from '@/lib/fetchPatientData';
 
 const excludedHistoryKeys = ['_id', 'patient_name', 'date_of_birth', 'gender'];
 
@@ -84,43 +85,17 @@ const ProfileMedHistory: React.FC = () => {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    const fetchPatientData = async () => {
+    async function loadData() {
       try {
-        const response = await fetch('/api/getUser');
-        const data = await response.json();
-        // Use the first user returned from the API
-        const user = data[0];
-
-        // Split full name into first and last names.
-        const [fname, ...rest] = (user.patient_name || '').split(' ');
-        const lname = rest.join(' ');
-
-        // Calculate age from date_of_birth.
-        const dob = new Date(user.date_of_birth);
-        const diffMs = Date.now() - dob.getTime();
-        const ageDate = new Date(diffMs);
-        const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-
-        const mappedPatient: Patient = {
-          id: user._id,
-          fname: fname || '',
-          lname: lname || '',
-          age,
-          BMI: 0,
-          history: user, // store entire JSON as history
-          emergencyContact: {} // adjust if provided
-        };
-
+        const mappedPatient = await fetchPatientData();
         setPatient(mappedPatient);
       } catch (err) {
         setError('Failed to fetch patient data');
       } finally {
-        
         setLoading(false);
       }
-    };
-
-    fetchPatientData();
+    }
+    loadData();
   }, []);
 
   if (loading) {
