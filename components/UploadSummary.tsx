@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle } from 'lucide-react';
 
 function UrgentFollowUpModal({ onClose }: { onClose: () => void }) {
   return (
@@ -19,7 +19,32 @@ function UrgentFollowUpModal({ onClose }: { onClose: () => void }) {
             medical attention is recommended.
           </p>
           <Link href="/urgent-followup" className="text-red-600 hover:text-red-800 font-medium text-sm">
-            Learn more and schedule follow-up
+            Learn more
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GoodResultsModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose}></div>
+      {/* Modal Content */}
+      <div className="relative bg-white rounded-lg shadow-md overflow-hidden w-11/12 md:w-1/2">
+        <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 flex items-center">
+          <CheckCircle className="h-6 w-6 mr-2" />
+          <h2 className="text-xl font-semibold">All Results Normal</h2>
+        </div>
+        <div className="p-6">
+          <p className="text-sm text-gray-700 mb-4">
+            Great news! All your vital signs and lab results are within normal ranges. Keep up your current health regimen
+            and remember to schedule regular checkups.
+          </p>
+          <Link href="/dashboard" className="text-green-600 hover:text-green-800 font-medium text-sm">
+            Return to Dashboard
           </Link>
         </div>
       </div>
@@ -31,7 +56,8 @@ export default function UploadSummary() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [apiResult, setApiResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showUrgentModal, setShowUrgentModal] = useState(false);
+  const [showGoodModal, setShowGoodModal] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -56,9 +82,11 @@ export default function UploadSummary() {
       const data = await response.json();
       setApiResult(data);
 
-      // If API returns a result equal to 1, show the modal.
+      // Show appropriate modal based on API result (assuming data[0] is used to indicate result status)
       if (data[0] === 1) {
-        setShowModal(true);
+        setShowUrgentModal(true);
+      } else if (data[0] === 0) {
+        setShowGoodModal(true);
       }
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -104,8 +132,9 @@ export default function UploadSummary() {
         </form>
       </div>
 
-      {/* Urgent Follow-Up Modal */}
-      {showModal && <UrgentFollowUpModal onClose={() => setShowModal(false)} />}
+      {/* Conditionally render modals based on API results */}
+      {showUrgentModal && <UrgentFollowUpModal onClose={() => setShowUrgentModal(false)} />}
+      {showGoodModal && <GoodResultsModal onClose={() => setShowGoodModal(false)} />}
     </div>
   );
 }
