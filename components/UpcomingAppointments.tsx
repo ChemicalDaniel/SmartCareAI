@@ -6,12 +6,12 @@ export default function UpcomingAppointments() {
   const [showModal, setShowModal] = React.useState(false)
 
   const appointments = [
-    { date: "2023-06-10", time: "10:00 AM", doctor: "Dr. Brown", type: "Cardiology checkup" },
-    { date: "2023-06-25", time: "2:30 PM", doctor: "Dr. Davis", type: "Dental cleaning" },
-    { date: "2023-07-05", time: "11:15 AM", doctor: "Dr. Wilson", type: "Eye exam" },
-    { date: "2023-07-15", time: "09:00 AM", doctor: "Dr. Smith", type: "General checkup" },
-    { date: "2023-08-01", time: "01:45 PM", doctor: "Dr. Johnson", type: "Dermatology consultation" },
-    { date: "2023-08-20", time: "03:15 PM", doctor: "Dr. Lee", type: "Physiotherapy session" },
+    { date: "06/10/23", time: "10:00 AM", doctor: "Dr. Brown", type: "Cardiology checkup" },
+    { date: "06/25/23", time: "2:30 PM", doctor: "Dr. Davis", type: "Dental cleaning" },
+    { date: "07/05/23", time: "11:15 AM", doctor: "Dr. Wilson", type: "Eye exam" },
+    { date: "07/15/23", time: "09:00 AM", doctor: "Dr. Smith", type: "General checkup" },
+    { date: "08/01/23", time: "01:45 PM", doctor: "Dr. Johnson", type: "Dermatology consultation" },
+    { date: "08/20/23", time: "03:15 PM", doctor: "Dr. Lee", type: "Physiotherapy session" },
   ]
 
   return (
@@ -52,7 +52,7 @@ export default function UpcomingAppointments() {
         {/* Modal Content */}
         <div className="relative bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 p-6 h-96">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">All Prescriptions</h2>
+          <h2 className="text-xl font-semibold">All Upcoming Appointments</h2>
           <button 
           onClick={() => setShowModal(false)} 
           className="text-xs text-gray-600 hover:text-gray-800"

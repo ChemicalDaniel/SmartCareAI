@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 import { Patient } from "@/lib/types/patient"
 import { extractVitalSigns, VitalSigns } from "@/lib/extractVitalSigns"
 import { Encounter, extractEncounters } from "@/lib/extractEncounters"
+import { Prescription, extractPrescriptions } from "@/lib/extractPerscription"
 
 type CardTransitionProps = {
   children: React.ReactNode
@@ -36,6 +37,7 @@ export default function Dashboard() {
   const [patient, setPatient] = useState<Patient | null>(null)
   const [vitalSigns, setVitalSigns] = useState<VitalSigns[] | null>(null);
   const [encounters, setEncounters] = useState<Encounter[] | null>(null)
+  const [prescriptions, setPrescriptions] = useState<Prescription[] | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -45,6 +47,8 @@ export default function Dashboard() {
         setPatient(data)
         setVitalSigns(extractVitalSigns(data.history["Vital Signs"]))
         setEncounters(extractEncounters(data.history["Encounters"]))
+        setPrescriptions(extractPrescriptions(data.history["Medications"]))
+        console.log(extractPrescriptions(data.history["Medications"]))
       } finally {
         setIsLoading(false)
       }
@@ -108,7 +112,7 @@ export default function Dashboard() {
           <RecentVisits encounters={encounters ?? []}/>
         </CardTransition>
         <CardTransition delay={0.7}>
-          <Prescriptions />
+          <Prescriptions prescriptions={prescriptions ?? []}/>
         </CardTransition>
         <CardTransition delay={0.8}>
           <UpcomingAppointments />
@@ -117,4 +121,3 @@ export default function Dashboard() {
     </div>
   )
 }
-
