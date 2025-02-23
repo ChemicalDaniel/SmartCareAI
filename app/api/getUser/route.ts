@@ -4,9 +4,9 @@ import clientPromise from '@/lib/mongodb';
 export async function GET() {
   try {
     const client = await clientPromise;
-    const db = client.db('smartcaredb'); // Replace with your actual database name
+    const db = client.db('smartcaredb');
 
-    const testCollection = db.collection('users'); // Replace with an existing collection name
+    const testCollection = db.collection('users');
     const documents = await testCollection.find({}).toArray();
 
     return NextResponse.json(documents);
