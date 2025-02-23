@@ -73,8 +73,6 @@ This project is licensed under the Apache License - see the LICENSE file for det
 
 ## 👥 Team
 
-- (Add team member names and roles)
-
-## 📞 Support
-
-For support, please email (add support email) or open an issue in the GitHub repository.
+- Obinna Nwachukwu 
+- Ethan Loo
+- Nicolle Chavez-Ramirez
