@@ -30,13 +30,13 @@ export default function RecentVisits() {
         const hashedId = visit.id.toString(16)
         return (
           <li key={visit.id} className="border-b last:border-b-0 pb-2 last:pb-0 hover:bg-gray-100 cursor-pointer transition-colors duration-200 rounded-sm">
-        <Link href={`/labreport#${hashedId}`}>
-          <>
-            <p className="font-semibold text-gray-800">{visit.date}</p>
-            <p className="text-sm text-gray-600">{visit.doctor}</p>
-            <p className="text-sm text-gray-500">{visit.reason}</p>
-          </>
-        </Link>
+            <Link href={`/labreport#${hashedId}`}>
+              <>
+                <p className="font-semibold text-gray-800">{visit.date}</p>
+                <p className="text-sm text-gray-600">{visit.doctor}</p>
+                <p className="text-sm text-gray-500">{visit.reason}</p>
+              </>
+            </Link>
           </li>
         )
       })}
