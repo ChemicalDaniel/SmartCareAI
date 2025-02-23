@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react'
+import Link from 'next/link'
 
 export default function RecentVisits() {
   const [showModal, setShowModal] = React.useState(false)
@@ -18,20 +19,27 @@ export default function RecentVisits() {
       <h2 className="text-xl font-semibold">Recent Visits</h2>
       <p 
       onClick={() => setShowModal(true)} 
-      className="text-xs hover:text-purple-100 cursor-pointer"
+      className="text-xs hover:text-blue-100 cursor-pointer"
       >
       See More
       </p>
     </div>
     <div className="p-6">
       <ul className="space-y-4">
-      {visits.slice(0, 3).map((visit, index) => (
-        <li key={index} className="border-b last:border-b-0 pb-2 last:pb-0 hover:bg-gray-100 cursor-pointer transition-colors duration-200 rounded-sm">
-          <p className="font-semibold text-gray-800">{visit.date}</p>
-          <p className="text-sm text-gray-600">{visit.doctor}</p>
-          <p className="text-sm text-gray-500">{visit.reason}</p>
-        </li>
-      ))}
+      {visits.slice(0, 3).map((visit) => {
+        const hashedId = visit.id.toString(16)
+        return (
+          <li key={visit.id} className="border-b last:border-b-0 pb-2 last:pb-0 hover:bg-gray-100 cursor-pointer transition-colors duration-200 rounded-sm">
+        <Link href={`/labreport#${hashedId}`}>
+          <>
+            <p className="font-semibold text-gray-800">{visit.date}</p>
+            <p className="text-sm text-gray-600">{visit.doctor}</p>
+            <p className="text-sm text-gray-500">{visit.reason}</p>
+          </>
+        </Link>
+          </li>
+        )
+      })}
       </ul>
     </div>
     </div>
@@ -70,22 +78,6 @@ export default function RecentVisits() {
     </div>
     )}
   </div>
-    // <div className="bg-white rounded-lg shadow-md overflow-hidden">
-    //   <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4">
-    //     <h2 className="text-xl font-semibold">Recent Visits</h2>
-    //   </div>
-    //   <div className="p-6">
-    //     <ul className="space-y-4">
-    //       {visits.map((visit, index) => (
-    //         <li key={index} className="border-b last:border-b-0 pb-2 last:pb-0 hover:bg-gray-100 cursor-pointer transition-colors duration-200 rounded-sm">
-    //           <p className="font-semibold text-gray-800">{visit.date}</p>
-    //           <p className="text-sm text-gray-600">{visit.doctor}</p>
-    //           <p className="text-sm text-gray-500">{visit.reason}</p>
-    //         </li>
-    //       ))}
-    //     </ul>
-    //   </div>
-    // </div>
   )
 }
 

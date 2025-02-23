@@ -112,19 +112,19 @@ const ProfileMedHistory: React.FC = () => {
                                 <table className="min-w-full divide-y divide-gray-200 mb-4">
                                     <thead>
                                         <tr>
-                                            <th className="w-1/4 px-4 py-2 text-left">Start</th>
-                                            <th className="w-1/4 px-4 py-2 text-left">Stop</th>
-                                            <th className="w-1/4 px-4 py-2 text-left">Descriptions</th>
-                                            <th className="w-1/4 px-4 py-2 text-left">Code</th>
+                                            <th className="w-1/5 px-4 py-2 text-left">Start</th>
+                                            <th className="w-1/5 px-4 py-2 text-left">Stop</th>
+                                            <th className="w-2/5 px-4 py-2 text-left">Descriptions</th>
+                                            <th className="w-1/5 px-4 py-2 text-left">Code</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {(entries as string[]).map((entry, index) => (
                                             <tr key={`${category}-${index}`}>
-                                                <td className="w-1/4 px-4 py-2">{entry}</td>
-                                                <td className="w-1/4 px-4 py-2">{entry}</td>
-                                                <td className="w-1/4 px-4 py-2">{entry}</td>
-                                                <td className="w-1/4 px-4 py-2">{entry}</td>
+                                                <td className="w-1/5 px-4 py-2">{entry}</td>
+                                                <td className="w-1/5 px-4 py-2">{entry}</td>
+                                                <td className="w-2/5 px-4 py-2">{entry}</td>
+                                                <td className="w-1/5 px-4 py-2">{entry}</td>
                                             </tr>
                                         ))}
                                     </tbody>
