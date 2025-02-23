@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Heart } from "lucide-react"
+import { HeartPulse } from "lucide-react"
 
 export default function NavBar() {
   return (
@@ -8,8 +8,8 @@ export default function NavBar() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center space-x-2">
-              <Heart className="h-6 w-6 text-gray-900" />
-              <Link href="/" className="text-xl font-semibold text-gray-800">SmartCare.ai</Link>
+              <HeartPulse className="h-6 w-6 text-red-500" />
+              <Link href="/" className="text-xl font-semibold text-gray-800">SmartCare.<span className='text-red-500'>ai</span></Link>
             </div>
           </div>
           <div className="flex items-center">
