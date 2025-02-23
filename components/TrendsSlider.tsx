@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Line } from "react-chartjs-2"
+import { useState } from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,32 +11,55 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js"
+} from "chart.js";
+import { VitalSigns } from "@/lib/extractVitalSigns";
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+type TrendsSliderProps = {
+  vitals: VitalSigns[];
+};
 
-const trendData = [
-  {
-    label: "Blood Pressure",
-    data: [120, 122, 119, 123, 121, 124, 120],
-    borderColor: "rgb(255, 99, 132)",
-  },
-  {
-    label: "Heart Rate",
-    data: [72, 74, 71, 73, 72, 75, 73],
-    borderColor: "rgb(53, 162, 235)",
-  },
-  {
-    label: "Blood Sugar",
-    data: [95, 100, 92, 98, 103, 97, 99],
-    borderColor: "rgb(75, 192, 192)",
-  },
-]
+export default function TrendsSlider({ vitals }: TrendsSliderProps) {
+  const [currentTrendIndex, setCurrentTrendIndex] = useState(0);
 
-const labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]
+  // Sort the vital signs in ascending order (oldest to newest)
+  const sortedVitals = [...vitals].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
-export default function TrendsSlider() {
-  const [currentTrendIndex, setCurrentTrendIndex] = useState(0)
+  // Create labels from the date field, formatted as MM/DD/YY.
+  const labels = sortedVitals.map((v) => {
+    const d = new Date(v.date);
+    return d.toLocaleDateString("en-US", {
+      month: "2-digit",
+      day: "2-digit",
+      year: "2-digit",
+    });
+  });
+
+  // Define the available trends (human readable)
+  const trendOptions = [
+    { label: "Height (cm)", key: "bodyHeight", borderColor: "rgb(75, 192, 192)" },
+    { label: "Pain Severity", key: "painSeverity", borderColor: "rgb(255, 99, 132)" },
+    { label: "Weight (kg)", key: "bodyWeight", borderColor: "rgb(54, 162, 235)" },
+    { label: "BMI", key: "bmi", borderColor: "rgb(255, 205, 86)" },
+    { label: "Heart Rate (bpm)", key: "heartRate", borderColor: "rgb(153, 102, 255)" },
+    { label: "Respiratory Rate (breaths/min)", key: "respiratoryRate", borderColor: "rgb(201, 203, 207)" },
+  ];
+
+  const selectedTrend = trendOptions[currentTrendIndex];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: selectedTrend.label,
+        data: sortedVitals.map((v) => v[selectedTrend.key]),
+        borderColor: selectedTrend.borderColor,
+        tension: 0.1,
+      },
+    ],
+  };
 
   const options = {
     responsive: true,
@@ -46,15 +69,10 @@ export default function TrendsSlider() {
       },
       title: {
         display: true,
-        text: trendData[currentTrendIndex].label,
+        text: selectedTrend.label,
       },
     },
-  }
-
-  const data = {
-    labels,
-    datasets: [trendData[currentTrendIndex]],
-  }
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -64,7 +82,7 @@ export default function TrendsSlider() {
           onChange={(e) => setCurrentTrendIndex(Number(e.target.value))}
           className="block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         >
-          {trendData.map((trend, index) => (
+          {trendOptions.map((trend, index) => (
             <option key={trend.label} value={index}>
               {trend.label}
             </option>
@@ -73,6 +91,5 @@ export default function TrendsSlider() {
       </div>
       <Line options={options} data={data} />
     </div>
-  )
+  );
 }
-

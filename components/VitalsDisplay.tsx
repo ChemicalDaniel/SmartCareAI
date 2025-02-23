@@ -1,28 +1,51 @@
-const mockVitals = [
-  { name: "Blood Pressure", value: "120/80 mmHg" },
-  { name: "Heart Rate", value: "72 bpm" },
-  { name: "Oxygen Saturation", value: "98%" },
-  { name: "Temperature", value: "98.6°F" },
-  { name: "Respiratory Rate", value: "16 breaths/min" },
-]
+import React from "react";
 
-export default function VitalsDisplay() {
+// Define the type for the vital signs entry.
+export type VitalSigns = {
+  date: Date; // raw date; you can format it when displaying
+  bodyHeight: number;
+  painSeverity: number;
+  bodyWeight: number;
+  bmi: number;
+  heartRate: number;
+  respiratoryRate: number;
+};
+
+interface VitalsDisplayProps {
+  vital: VitalSigns | null;
+}
+
+export default function VitalsDisplay({ vital }: VitalsDisplayProps) {
+  if (!vital) {
+    return <div>No vital signs available</div>;
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4">
-        <h2 className="text-xl font-semibold">Current Vitals</h2>
+        <h2 className="text-xl font-semibold">Recent Vitals</h2>
       </div>
       <div className="p-6">
-        <ul className="space-y-4">
-          {mockVitals.map((vital, index) => (
-            <li key={index} className="flex justify-between items-center">
-              <span className="text-gray-600 text-sm">{vital.name}</span>
-              <span className="font-medium text-gray-800">{vital.value}</span>
+        <ul className="space-y-2">
+            <li>
+            <strong>Body Height:</strong>{" "}
+            {`${Math.floor(vital.bodyHeight / 30.48)}' ${Math.round((vital.bodyHeight / 2.54) % 12)}"`}
             </li>
-          ))}
+            <li>
+            <strong>Body Weight:</strong>{" "}
+            {`${Math.round(vital.bodyWeight * 2.20462)} lbs`}
+            </li>
+          <li>
+            <strong>BMI:</strong> {vital.bmi}
+          </li>
+          <li>
+            <strong>Heart Rate:</strong> {vital.heartRate} bpm
+          </li>
+          <li>
+            <strong>Respiratory Rate:</strong> {vital.respiratoryRate} breaths/min
+          </li>
         </ul>
       </div>
     </div>
-  )
+  );
 }
-

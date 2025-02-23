@@ -12,6 +12,8 @@ import UrgentFollowUp from "./UrgentFollowUp"
 import fetchPatientData from "@/lib/fetchPatientData"
 import { useEffect, useState } from "react"
 import { Patient } from "@/lib/types/patient"
+import { extractVitalSigns, VitalSigns } from "@/lib/extractVitalSigns"
+import { Encounter, extractEncounters } from "@/lib/extractEncounters"
 
 type CardTransitionProps = {
   children: React.ReactNode
@@ -32,6 +34,8 @@ function CardTransition({ children, delay = 0 }: CardTransitionProps) {
 
 export default function Dashboard() {
   const [patient, setPatient] = useState<Patient | null>(null)
+  const [vitalSigns, setVitalSigns] = useState<VitalSigns[] | null>(null);
+  const [encounters, setEncounters] = useState<Encounter[] | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -39,6 +43,8 @@ export default function Dashboard() {
       try {
         const data = await fetchPatientData()
         setPatient(data)
+        setVitalSigns(extractVitalSigns(data.history["Vital Signs"]))
+        setEncounters(extractEncounters(data.history["Encounters"]))
       } finally {
         setIsLoading(false)
       }
@@ -78,7 +84,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
         <div className="lg:col-span-2">
           <CardTransition delay={0.2}>
-            <TrendsSlider />
+            <TrendsSlider vitals={vitalSigns ?? []} />
           </CardTransition>
         </div>
         <div className="flex flex-col justify-between h-full space-y-8">
@@ -86,7 +92,7 @@ export default function Dashboard() {
             <UploadSummary />
           </CardTransition>
           <CardTransition delay={0.4}>
-            <VitalsDisplay />
+            <VitalsDisplay vital={vitalSigns?.[0] ?? null}/>
           </CardTransition>
         </div>
       </div>
@@ -99,7 +105,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <CardTransition delay={0.6}>
-          <RecentVisits />
+          <RecentVisits encounters={encounters ?? []}/>
         </CardTransition>
         <CardTransition delay={0.7}>
           <Prescriptions />
