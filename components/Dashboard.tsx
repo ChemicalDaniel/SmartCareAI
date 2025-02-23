@@ -79,12 +79,6 @@ export default function Dashboard() {
         {greeting}
       </h1>
 
-      <div className="mb-8">
-        <CardTransition delay={0.1}>
-          <UrgentFollowUp />
-        </CardTransition>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
         <div className="lg:col-span-2">
           <CardTransition delay={0.2}>

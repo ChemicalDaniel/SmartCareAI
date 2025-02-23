@@ -39,11 +39,11 @@ export default function TrendsSlider({ vitals }: TrendsSliderProps) {
 
   // Define the available trends (human readable)
   const trendOptions = [
+    { label: "Heart Rate (bpm)", key: "heartRate" as keyof VitalSigns, borderColor: "rgb(153, 102, 255)" },
     { label: "Height (cm)", key: "bodyHeight" as keyof VitalSigns, borderColor: "rgb(75, 192, 192)" },
     { label: "Pain Severity", key: "painSeverity" as keyof VitalSigns, borderColor: "rgb(255, 99, 132)" },
     { label: "Weight (kg)", key: "bodyWeight" as keyof VitalSigns, borderColor: "rgb(54, 162, 235)" },
     { label: "BMI", key: "bmi" as keyof VitalSigns, borderColor: "rgb(255, 205, 86)" },
-    { label: "Heart Rate (bpm)", key: "heartRate" as keyof VitalSigns, borderColor: "rgb(153, 102, 255)" },
     { label: "Respiratory Rate (breaths/min)", key: "respiratoryRate" as keyof VitalSigns, borderColor: "rgb(201, 203, 207)" },
   ];
 

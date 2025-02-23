@@ -1,11 +1,11 @@
 // Define a type for the vital signs entries.
 export type VitalSigns = {
     date: Date; // raw date; you can format it when displaying
+    heartRate: number;
     bodyHeight: number;
     painSeverity: number;
     bodyWeight: number;
     bmi: number;
-    heartRate: number;
     respiratoryRate: number;
   };
   
