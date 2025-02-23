@@ -55,7 +55,6 @@ The application can be configured through environment variables:
 
 - `MONGODB_URI`: Your MongoDB connection string
 - `GOOGLE_AI_API_KEY`: Google AI API credentials
-- (Add other relevant configuration options)
 
 ## 🤝 Contributing
 
