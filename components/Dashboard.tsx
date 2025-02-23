@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion"
 import TrendsSlider from "./TrendsSlider"
 import VitalsDisplay from "./VitalsDisplay"
@@ -26,7 +28,7 @@ function CardTransition({ children, delay = 0 }: CardTransitionProps) {
 }
 
 export default function Dashboard() {
-  const userName = "David" // This could be fetched from a user context or API
+  const userName = "Jane" // This could be fetched from a user context or API
   const currentTime = new Date()
   const greeting =
     currentTime.getHours() < 12

@@ -1,15 +1,16 @@
 import NavBar from "../../components/NavBar"
 import Footer from "../../components/Footer"
-import Dashboard from "../../components/Dashboard"
+import Hipaa from "../../components/hipaa"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="h-dvh bg-gray-50">
       <NavBar />
       <main className="pt-8">
-        <Dashboard />
+        <Hipaa />
       </main>
       <Footer />
     </div>
   )
 }
+

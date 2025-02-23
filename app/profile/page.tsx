@@ -1,4 +1,5 @@
 import NavBar from "../../components/NavBar"
+import Footer from "../../components/Footer"
 import Profile from "../../components/Profile"
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <main className="pt-8">
         <Profile />
       </main>
+      <Footer />
     </div>
   )
 }
